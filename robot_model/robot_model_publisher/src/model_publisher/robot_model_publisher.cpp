@@ -1,5 +1,5 @@
 // file: robot_model_publisher.cpp
-// Broadcasts an URDF only once. 
+// Broadcasts an URDF repeatedly
 
 #include <stdio.h>
 #include <iostream>
@@ -10,7 +10,6 @@
 #include "urdf/model.h"
 #include <lcm/lcm-cpp.hpp>
 #include "lcmtypes/model_pub/robot_urdf_t.hpp"
-#include <ConciseArgs>
 
 #include <model-client/model-client.hpp>
 
@@ -18,10 +17,13 @@ using namespace std;
 
 int main(int argc, char ** argv)
 {
-  string urdf_file = "path_to_your.urdf";
-  ConciseArgs opt(argc, (char**)argv);
-  opt.add(urdf_file, "u", "urdf_file","Robot URDF file");
-  opt.parse();
+
+  if (argc != 2) {
+    fprintf(stderr, "Correct Usage: %s <filename.urdf>\n", argv[0]);
+    exit(1);
+  }
+
+  string urdf_file = std::string(argv[1]);//  "path_to_your.urdf";
   std::cout << "urdf_file: " << urdf_file << "\n";
 
   ModelClient* model_client;
