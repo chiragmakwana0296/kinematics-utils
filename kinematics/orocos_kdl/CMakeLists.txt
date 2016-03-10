@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.6.0)
 set(POD_NAME orocos_kdl)
 include(cmake/pods.cmake)
 
-add_definitions(-DEIGEN2_SUPPORT)
+#add_definitions(-DEIGEN2_SUPPORT)
 
 #tell cmake to build these subdirectories
 add_subdirectory(orocos_kinematics_dynamics/orocos_kdl/src)
