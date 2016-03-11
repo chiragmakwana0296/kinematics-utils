@@ -8,7 +8,7 @@
 #include <lcm/lcm-cpp.hpp>
 #include <kdl/tree.hpp>
 #include "lcmtypes/drc/tf_t.hpp"
-#include "lcmtypes/drc/joint_angles_t.hpp"
+#include "lcmtypes/bot_core/joint_angles_t.hpp"
 #include "lcmtypes/drc/robot_urdf_t.hpp"
 #include "forward_kinematics/tf_publisher.hpp"
 #include "kdl_parser/kdl_parser.hpp"
@@ -33,7 +33,7 @@ namespace robot_tf_publisher {
 
         void handleMessage(const lcm::ReceiveBuffer* rbuf,
                 const std::string& chan, 
-                const drc::joint_angles_t* msg)
+                const bot_core::joint_angles_t* msg)
         {
 
 		// call a routine that calculates the transforms given the joint_angles_t* msg.
