@@ -7,6 +7,7 @@
 
 #include "urdf/model.h"
 #include <lcm/lcm.h>
+#include <lcm/lcm-cpp.hpp>
 #include "lcmtypes/model_pub_robot_urdf_t.h"
 #include <fstream>
 
