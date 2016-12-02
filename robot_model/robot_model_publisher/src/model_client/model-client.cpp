@@ -196,34 +196,40 @@ bool ModelClient::readURDFFromFile(std::string urdf_file){
   robot_name_ = robot_model.getName();
 }
 
+inline bool isStringInVector(std::vector<std::string> string_vector,
+                             std::string my_string) {
+  return (std::find(string_vector.begin(), string_vector.end(), my_string) !=
+          string_vector.end());
+}
 
-void ModelClient::setHandConfiguration(){
-
-  if(find(joint_names_.begin(), joint_names_.end(), "left_f0_j0" ) != joint_names_.end()){
+void ModelClient::setHandConfiguration() {
+  if (isStringInVector(joint_names_, "left_f0_j0")) {
     std::cout << "Robot fitted with left Sandia hand\n";
-    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_SANDIA; //drc::robot_urdf_t::LEFT_SANDIA;
-  }else if(find(joint_names_.begin(), joint_names_.end(), "left_finger[0]/joint_base" ) != joint_names_.end()){
+    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_SANDIA;
+  } else if (isStringInVector(joint_names_, "left_finger[0]/joint_base")) {
     std::cout << "Robot fitted with left iRobot hand\n";
-    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_IROBOT; //drc::robot_urdf_t::LEFT_IROBOT;
-  }else if(find(joint_names_.begin(), joint_names_.end(), "left_finger_1_joint_1" ) != joint_names_.end()){
+    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_IROBOT;
+  } else if (isStringInVector(joint_names_, "left_finger_1_joint_1") ||
+             isStringInVector(joint_names_, "l_finger_1_joint_1")) {
     std::cout << "Robot fitted with left Robotiq hand\n";
-    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_ROBOTIQ; //drc::robot_urdf_t::LEFT_ROBOTIQ;
-  }else{
-    std::cout << "Robot has no left hand\n"; 
-    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_NONE; //drc::robot_urdf_t::LEFT_NONE;
+    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_ROBOTIQ;
+  } else {
+    std::cout << "Robot has no left hand\n";
+    left_hand_ = MODEL_PUB_ROBOT_URDF_T_LEFT_NONE;
   }
 
-  if(find(joint_names_.begin(), joint_names_.end(), "right_f0_j0" ) != joint_names_.end()){
+  if (isStringInVector(joint_names_, "right_f0_j0")) {
     std::cout << "Robot fitted with right Sandia hand\n";
-    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_SANDIA;//drc::robot_urdf_t::RIGHT_SANDIA;
-  }else if(find(joint_names_.begin(), joint_names_.end(), "right_finger[0]/joint_base" ) != joint_names_.end()){
+    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_SANDIA;
+  } else if (isStringInVector(joint_names_, "right_finger[0]/joint_base")) {
     std::cout << "Robot fitted with right iRobot hand\n";
-    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_IROBOT;//drc::robot_urdf_t::RIGHT_IROBOT;
-  }else if(find(joint_names_.begin(), joint_names_.end(), "right_finger_1_joint_1" ) != joint_names_.end()){
+    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_IROBOT;
+  } else if (isStringInVector(joint_names_, "right_finger_1_joint_1") ||
+             isStringInVector(joint_names_, "r_finger_1_joint_1")) {
     std::cout << "Robot fitted with right Robotiq hand\n";
-    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_ROBOTIQ;//drc::robot_urdf_t::RIGHT_ROBOTIQ;
-  }else{
-    std::cout << "Robot has no right hand\n"; 
-    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_NONE;//drc::robot_urdf_t::RIGHT_NONE;
+    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_ROBOTIQ;
+  } else {
+    std::cout << "Robot has no right hand\n";
+    right_hand_ = MODEL_PUB_ROBOT_URDF_T_RIGHT_NONE;
   }
 }
