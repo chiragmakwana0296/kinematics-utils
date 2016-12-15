@@ -1,4 +1,4 @@
-pronto-externals
+kinematics-utils
 ================
 
-Externals specifically for pronto (in addition to commonly used externals)
+Simple wrapper of a version of KDL and URDF parser
