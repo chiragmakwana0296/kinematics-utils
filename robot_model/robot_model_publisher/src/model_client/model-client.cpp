@@ -189,11 +189,14 @@ bool ModelClient::readURDFFromFile(std::string urdf_file){
   if (!robot_model.initString( xml_string ))
   {
     std::cerr << "ERROR: Model Parsing the xml failed" << std::endl;
+    return false;
   }
 
   // Set the member variable:
   urdf_xml_string_ = xml_string;
   robot_name_ = robot_model.getName();
+
+  return true;
 }
 
 inline bool isStringInVector(std::vector<std::string> string_vector,
